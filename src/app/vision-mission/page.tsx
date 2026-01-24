@@ -4,13 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Eye,
   Zap,
   Globe,
   ArrowLeft,
   Users,
 } from "lucide-react";
-{/*CORE VALUE DATA*/}
+
+{/*VALUE DATA*/}
 const VALUES_DATA = [
   {
     id: "friendship",
@@ -49,21 +49,19 @@ const VALUES_DATA = [
 
 export default function VisionMissionPage() {
   const [activeValue, setActiveValue] = useState(VALUES_DATA[0]);
-
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 overflow-x-hidden">
-      
       {/*HERO SECTION*/}
-      <section className="relative pt-16 pb-20 px-6 bg-slate-50">
+      <section className="relative pt-16 pb-5 px-10 bg-slate-50">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-8">
+          <motion.div initial={{opacity:0, y:20 }} animate={{opacity: 1, y:0 }} transition={{duration: 0.6 }}>
+            <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4">
               <ArrowLeft size={14} /> Back to Home
             </Link>
-            <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-8">
-              Learn <br /> <span className="text-blue-600">Share <br /> <span className="text-black italic text-7xl md:text-8xl"> IMPACT!</span></span>
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-4">
+              Learn <br /> <span className="text-blue-600">Share <br /> <span className="text-black italic text-5xl md:text-8xl"> IMPACT!</span></span>
             </h1>
-            <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-500 text-xs md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
                StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students.
             </p>
           </motion.div>
@@ -71,21 +69,20 @@ export default function VisionMissionPage() {
       </section>
 
       {/*VISION SECTION*/}
-      <section className="py-12 px-6 border-y border-slate-100">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <section className="py-6 px-10 my-10 border-y border-slate-100">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
           <div className="lg:col-span-5">
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 text-blue-600 rounded-2xl mb-6">
-              <Eye size={20} strokeWidth={3} />
+            <div className="inline-flex items-center gap-3 px-4 bg-blue-50 text-blue-600 rounded-2xl mb-3">
               <span className="text-xs font-black uppercase tracking-widest">
                 Our Vision & Mission
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-tight mb-6">
-              aspiring future business leaders <br /> in Indonesia.
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter leading-tight">
+              Aspiring future business leaders in Indonesia.
             </h2>
           </div>
           <div className="lg:col-span-7">
-            <p className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight border-l-4 border-blue-600 pl-8">
+            <p className="text-xl md:text-2xl italic text-slate-800 leading-tight tracking-tight border-l-4 border-blue-600 pl-8 py-5 ">
               "To be the home of connected and integrated economic leaders, to push the nation towards a developed country."
             </p>
           </div>
@@ -93,16 +90,16 @@ export default function VisionMissionPage() {
       </section>
 
       {/* VALUE SECTION*/}
-      <section className="py-6 px-6 bg-white overflow-hidden">
+      <section className="py-6 px-10 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-5">
             <h2 className="text-xl font-black tracking-widest text-blue-600 mb-4 text-center md:text-left">Inside StudentsxCEOs Jakarta</h2>
             <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-center md:text-left">
               Our <span className="italic">Value!</span>
             </h3>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
             {/*NAVIGASI KIRI*/}
             <div className="lg:col-span-5 flex flex-col gap-4">
               {VALUES_DATA.map((val) => {
@@ -140,10 +137,10 @@ export default function VisionMissionPage() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeValue.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{opacity:0, y:10 }}
+                  animate={{ opacity:1, y: 0 }}
+                  exit={{opacity: 0, y: -10 }}
+                  transition={{duration: 0.3 }}
                   className="bg-slate-50 rounded-[4rem] p-8 md:p-14 h-full border border-slate-100 flex flex-col justify-between overflow-hidden relative"
                 >
                   <div className="relative z-10">
@@ -172,10 +169,10 @@ export default function VisionMissionPage() {
       </section>
 
       {/*CTA SECTION*/}
-      <section className="py-12 px-6 text-center">
-        <div className="max-w-3xl mx-auto bg-blue-50 p-16 rounded-[4rem] border border-blue-100">
+      <section className="py-3 px-3 my-10 mx-3 md:mx-16 text-center">
+        <div className="max-w-3xl mx-auto bg-blue-50 p-11 rounded-[4rem] border border-blue-100">
           <h2 className="text-3xl font-black mb-6 tracking-tight">
-            Ready to see our impact?
+            Let's dive into our projects!
           </h2>
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <Link
@@ -195,7 +192,7 @@ export default function VisionMissionPage() {
       </section>
       {/*FOOTER*/}
       <footer className="py-12 text-center text-slate-300 text-[9px] font-black uppercase tracking-[0.4em]">
-        © 2026 StudentsxCEOs Jakarta. Purpose Driven.
+        © 2026 StudentsxCEOs Jakarta. <br/> Learn Share Impact!
       </footer>
     </div>
   );
