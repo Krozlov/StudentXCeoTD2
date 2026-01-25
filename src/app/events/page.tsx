@@ -188,6 +188,8 @@ export default function ProjectsPage() {
       <footer className="py-12 text-center text-slate-300 text-[9px] font-black uppercase tracking-[0.4em]">
         © 2026 StudentsxCEOs Jakarta. <br/> Learn Share Impact!
       </footer>
+      
     </div>
+    
   );
 }
