@@ -52,7 +52,7 @@ export default function VisionMissionPage() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 overflow-x-hidden">
       {/*HERO SECTION*/}
-      <section className="relative pt-16 pb-5 px-10 bg-slate-50">
+      <section className="relative pt-30 pb-5 px-10 bg-slate-50">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{opacity:0, y:20 }} animate={{opacity: 1, y:0 }} transition={{duration: 0.6 }}>
             <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4">

@@ -10,6 +10,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Adding the mesh animations to the theme */
+  --animation-mesh: mesh 15s infinite ease-in-out;
+  --animation-mesh-delay: mesh 18s infinite ease-in-out reverse;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +27,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Mesh Gradient Animation */
+@keyframes mesh {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
 /* Custom Animation for the Logo on home page */
@@ -40,4 +52,14 @@ body {
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
+}
+
+/* Utility classes for the mesh */
+.animate-mesh {
+  animation: var(--animation-mesh);
+}
+
+.animate-mesh-delay {
+  animation: var(--animation-mesh-delay);
+  animation-delay: 2s;
 }
