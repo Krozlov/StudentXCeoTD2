@@ -1,10 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Trophy } from "lucide-react";
 
-// Animation
+// ANIMATION VARIANTS
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -25,7 +27,26 @@ const itemVariants = {
   },
 };
 
+// Running Text Content
+const SXC_HIGHLIGHTS = [
+  "Bridging Students & Top CEOs",
+  "14 Batches of Excellence",
+  "Premier Leadership Accelerator",
+  "Impactful Mentorship Programs",
+  "Expanding Professional Networks"
+];
+
 export default function Home() {
+  const [index, setIndex] = useState(0);
+
+  // Running Texts
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % SXC_HIGHLIGHTS.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <motion.div 
       initial="hidden"
@@ -33,8 +54,8 @@ export default function Home() {
       variants={containerVariants}
       className="min-h-screen bg-white text-slate-900 font-sans flex flex-col"
     >
-      {/* Hero Section */}
-      <section className="relative flex-1 flex items-start md:items-center overflow-hidden bg-white px-6 pt-32 md:pt-35 pb-12">
+      {/* HERO SECTION */}
+      <section className="relative flex-1 flex items-start md:items-center overflow-hidden bg-white px-6 pt-32 md:pt-25 pb-12">
         
         {/* Dynamic Background */}
         <motion.div 
@@ -49,9 +70,8 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 w-full relative z-10">
           
-          {/* Left Side Title */}
+          {/* Left Side Content */}
           <div className="flex-[1.5] text-center md:text-left z-10">
-            {/* Header */}
             <motion.div variants={itemVariants} className="mb-4">
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic pr-10 bg-clip-text text-transparent bg-gradient-to-r from-slate-950 via-blue-700 to-blue-500 drop-shadow-md">
                 STUDENTSXCEO
@@ -70,12 +90,33 @@ export default function Home() {
               Impact!
             </motion.h1>
             
-            <motion.p variants={itemVariants} className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+            <motion.p variants={itemVariants} className="mt-4 text-sm md:text-base text-slate-500 leading-relaxed max-w-lg">
               The premier platform bridging the gap between top-tier CEOs and the next generation of Indonesian leaders. 
               Join us in our mission to empower and inspire.
             </motion.p>
+
+            {/* Rotating Highlight with Leadership Trophy Icon */}
+            <motion.div variants={itemVariants} className="mt-8 h-12 overflow-hidden flex justify-center md:justify-start items-center gap-3">
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                <Trophy size={20} fill="currentColor" /> 
+              </div>
+              <div className="relative h-full flex items-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={index}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -30, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute whitespace-nowrap text-slate-900 font-black text-xl md:text-3xl tracking-tighter"
+                  >
+                    {SXC_HIGHLIGHTS[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </motion.div>
             
-            <motion.div variants={itemVariants} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <motion.div variants={itemVariants} className="mt-12 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link 
                 href="/vision-mission" 
                 className="px-8 py-4 bg-slate-900 text-white font-bold rounded-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200"
@@ -91,13 +132,28 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right Side logo */}
+          {/* Rigt Side Content */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.8, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-            className="flex-1 flex justify-center"
+            className="flex-1 flex justify-center relative"
           >
+            {/* Impact Badge 1 - CEO Network */}
+            <div className="absolute top-10 left-0 md:-left-4 z-20 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-blue-50 animate-float-slow hidden sm:block">
+              <div className="flex items-baseline gap-1">
+                <span className="text-blue-600 font-black text-2xl leading-none">50</span>
+                <span className="text-blue-600 font-bold text-xs">+</span>
+              </div>
+              <p className="text-slate-400 text-[8px] uppercase font-bold tracking-widest mt-1">Partner CEOs</p>
+            </div>
+
+            {/* Impact Badge 2 - Alumni Success */}
+            <div className="absolute bottom-20 right-0 md:-right-4 z-20 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-blue-50 animate-float-delayed hidden sm:block">
+              <p className="text-slate-950 font-black text-lg leading-none italic uppercase">Alumni</p>
+              <p className="text-blue-500 text-[8px] uppercase font-bold tracking-widest mt-1">Top-Tier Network</p>
+            </div>
+
             <div className="relative w-[350px] h-[350px] md:w-[500px] md:h-[500px] animate-float">
               <Image
                 src="/sxclogo.png" 
@@ -111,7 +167,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quick Access Grid */}
+      {/* QUICK ACCESS GRID */}
       <section className="py-12 max-w-6xl mx-auto px-6 w-full">
         <motion.div 
           variants={containerVariants}
