@@ -6,7 +6,8 @@ import Link from 'next/link';
 import ChatWidget from "@/components/ChatWidget";
 import { useState, useEffect } from "react";
 import { AIProvider } from "@/context/AIContext";
-import { Instagram, Linkedin } from "lucide-react"; // Removed Mail
+import { Instagram, Linkedin } from "lucide-react";
+import { usePathname } from "next/navigation"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,9 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname(); 
+
+  const isChatbotPage = pathname === "/chatbot";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <html lang="en">
@@ -48,11 +54,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
 
               <div className="flex items-center gap-8">
-                <div className="hidden md:flex space-x-8 text-sm font-semibold text-slate-600 uppercase tracking-widest">
-                  <Link href="/vision-mission" className="hover:text-blue-600 transition-colors">Vision</Link>
-                  <Link href="/team" className="hover:text-blue-600 transition-colors">Team</Link>
-                  <Link href="/events" className="hover:text-blue-600 transition-colors">Projects</Link>
-                  <Link href="/partners" className="hover:text-blue-600 transition-colors">Partners</Link>
+                <div className="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest">
+                  {/* Highlighting based on page */}
+                  <Link 
+                    href="/vision-mission" 
+                    className={`${isActive('/vision-mission') ? 'text-blue-600' : 'text-slate-600'} hover:text-blue-600 transition-colors`}
+                  >
+                    Vision
+                  </Link>
+                  <Link 
+                    href="/team" 
+                    className={`${isActive('/team') ? 'text-blue-600' : 'text-slate-600'} hover:text-blue-600 transition-colors`}
+                  >
+                    Team
+                  </Link>
+                  <Link 
+                    href="/events" 
+                    className={`${isActive('/events') ? 'text-blue-600' : 'text-slate-600'} hover:text-blue-600 transition-colors`}
+                  >
+                    Projects
+                  </Link>
+                  <Link 
+                    href="/partners" 
+                    className={`${isActive('/partners') ? 'text-blue-600' : 'text-slate-600'} hover:text-blue-600 transition-colors`}
+                  >
+                    Partners
+                  </Link>
                 </div>
                 <ChatWidget />
               </div>
@@ -65,80 +92,82 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
 
           {/* FOOTER SECTION */}
-          <footer className="bg-slate-50 border-t border-slate-100 pt-20 pb-10 px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                
-                {/* Brand Column */}
-                <div className="space-y-6">
-                  <h3 className="font-black italic text-3xl uppercase tracking-tighter">
-                    <span className="text-slate-950">SxC</span>
-                    <span className="text-blue-600 not-italic">JKT</span>
-                  </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed font-medium max-w-xs">
-                    Bridging the gap between students and top-tier business leaders in Indonesia.
-                  </p>
-                </div>
+          {!isChatbotPage && ( 
+            <footer className="bg-slate-50 border-t border-slate-100 pt-20 pb-10 px-6">
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                  
+                  {/* Brand Column */}
+                  <div className="space-y-6">
+                    <h3 className="font-black italic text-3xl uppercase tracking-tighter">
+                      <span className="text-slate-950">SxC</span>
+                      <span className="text-blue-600 not-italic">JKT</span>
+                    </h3>
+                    <p className="text-slate-500 text-sm leading-relaxed font-medium max-w-xs">
+                      Bridging the gap between students and top-tier business leaders in Indonesia.
+                    </p>
+                  </div>
 
-                {/* Explore Links */}
-                <div>
-                  <h4 className="font-bold uppercase text-[11px] tracking-[0.25em] text-blue-600 mb-8">Explore</h4>
-                  <ul className="space-y-4 text-sm font-bold text-slate-600">
-                    <li><Link href="/vision-mission" className="hover:text-blue-600 transition-colors">Vision & Mission</Link></li>
-                    <li><Link href="/team" className="hover:text-blue-600 transition-colors">Meet the Team</Link></li>
-                    <li><Link href="/events" className="hover:text-blue-600 transition-colors">Our Projects</Link></li>
-                  </ul>
-                </div>
+                  {/* Explore Links */}
+                  <div>
+                    <h4 className="font-bold uppercase text-[11px] tracking-[0.25em] text-blue-600 mb-8">Explore</h4>
+                    <ul className="space-y-4 text-sm font-bold text-slate-600">
+                      <li><Link href="/vision-mission" className="hover:text-blue-600 transition-colors">Vision & Mission</Link></li>
+                      <li><Link href="/team" className="hover:text-blue-600 transition-colors">Meet the Team</Link></li>
+                      <li><Link href="/events" className="hover:text-blue-600 transition-colors">Our Projects</Link></li>
+                    </ul>
+                  </div>
 
-                {/* Contact Us Column */}
-                <div className="lg:col-span-2">
-                  <h4 className="font-bold uppercase text-[11px] tracking-[0.25em] text-blue-600 mb-8">Contact Us</h4>
-                  <div className="flex flex-col gap-6">
-                    
-                    {/* Instagram Row */}
-                    <Link 
-                      href="https://instagram.com/studentsxceosjkt" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 group w-fit"
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-rose-500 group-hover:text-white group-hover:bg-rose-500 group-hover:border-rose-500 transition-all shadow-sm">
-                        <Instagram size={22} />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Instagram</span>
-                        <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">@studentsxceosjkt</span>
-                      </div>
-                    </Link>
+                  {/* Contact Us Column */}
+                  <div className="lg:col-span-2">
+                    <h4 className="font-bold uppercase text-[11px] tracking-[0.25em] text-blue-600 mb-8">Contact Us</h4>
+                    <div className="flex flex-col gap-6">
+                      
+                      {/* Instagram Row */}
+                      <Link 
+                        href="https://instagram.com/studentsxceosjkt" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 group w-fit"
+                      >
+                        <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-rose-500 group-hover:text-white group-hover:bg-rose-500 group-hover:border-rose-500 transition-all shadow-sm">
+                          <Instagram size={22} />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Instagram</span>
+                          <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">@studentsxceosjkt</span>
+                        </div>
+                      </Link>
 
-                    {/* LinkedIn Row */}
-                    <Link 
-                      href="https://www.linkedin.com/company/studentsxceos-jakarta/" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 group w-fit"
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-blue-600 group-hover:text-white group-hover:bg-blue-600 group-hover:border-blue-600 transition-all shadow-sm">
-                        <Linkedin size={22} />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">LinkedIn</span>
-                        <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">StudentsxCEOs Jakarta</span>
-                      </div>
-                    </Link>
+                      {/* LinkedIn Row */}
+                      <Link 
+                        href="https://www.linkedin.com/company/studentsxceos-jakarta/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 group w-fit"
+                      >
+                        <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-blue-600 group-hover:text-white group-hover:bg-blue-600 group-hover:border-blue-600 transition-all shadow-sm">
+                          <Linkedin size={22} />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">LinkedIn</span>
+                          <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">StudentsxCEOs Jakarta</span>
+                        </div>
+                      </Link>
 
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Bottom Copyright */}
-              <div className="pt-8 border-t border-slate-200/60 text-center">
-                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400">
-                  © 2026 StudentsxCEOs Jakarta. Learn Share Impact!
-                </p>
+                {/* Bottom Copyright */}
+                <div className="pt-8 border-t border-slate-200/60 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400">
+                    © 2026 StudentsxCEOs Jakarta. Learn Share Impact!
+                  </p>
+                </div>
               </div>
-            </div>
-          </footer>
+            </footer>
+          )}
         </AIProvider>
       </body>
     </html>
