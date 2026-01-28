@@ -26,7 +26,7 @@ export default function TeamPage() {
   // Team data structure - UPDATE THIS WITH REAL DATA
   const teamMembers: TeamMember[] = [
     {
-      name: "Position Available",
+      name: "Title",
       role: "President / CEO",
       department: "leadership",
       bio: "Leading Batch 14 with vision and dedication to empower future business leaders.",
@@ -34,7 +34,7 @@ export default function TeamPage() {
       email: "info@sxcjakarta.org"
     },
     {
-      name: "Position Available",
+      name: "Title",
       role: "Vice President",
       department: "leadership",
       bio: "Supporting strategic initiatives and organizational operations.",
@@ -46,11 +46,11 @@ export default function TeamPage() {
       role: "Project Manager",
       department: "events",
       bio: "Leading cross-functional teams and coordinating project execution.",
-      linkedin: "https://www.linkedin.com/in/yudhasilitonga/",
-      email: "yudha@sxcjakarta.org"
+      linkedin: "#",
+      email: "info@sxcjakarta.org"
     },
     {
-      name: "Position Available",
+      name: "Title",
       role: "Head of Marketing",
       department: "marketing",
       bio: "Amplifying SxC Jakarta's voice through strategic campaigns.",
@@ -58,7 +58,7 @@ export default function TeamPage() {
       email: "info@sxcjakarta.org"
     },
     {
-      name: "Position Available",
+      name: "Title",
       role: "Partnerships Lead",
       department: "partnerships",
       bio: "Building bridges with industry leaders and corporate partners.",
@@ -66,7 +66,7 @@ export default function TeamPage() {
       email: "info@sxcjakarta.org"
     },
     {
-      name: "Position Available",
+      name: "Title",
       role: "Finance Officer",
       department: "finance",
       bio: "Ensuring sustainable growth and financial transparency.",
