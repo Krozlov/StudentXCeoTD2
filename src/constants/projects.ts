@@ -1,5 +1,17 @@
 export const CATEGORIES = ["All", "High School Students", "University Students", "Fresh Graduates", "Public", "Associates & Alumni"];
 
+export interface Project {
+  id: number;
+  title: string;
+  categories: string[];
+  description: string;
+  outcomes: string[];
+  startDate: string;
+  endDate: string;
+  partnerRange?: string;
+  link?: string;
+}
+
 export const PROJECTS_DATA = [
   {
     id: 1,
@@ -29,7 +41,7 @@ export const PROJECTS_DATA = [
       "Goal-setting framework for short-term and long-term career paths"
     ],
     startDate: "2026-01-01",
-    endDate: "2026-01-30",
+    endDate: "2026-02-30",
     partnerRange: "Nov - Dec 2025",
     link: "https://www.instagram.com/studentsxceosjakarta"
   },

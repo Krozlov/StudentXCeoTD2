@@ -16,9 +16,6 @@ export default function VisionMissionPage() {
       <section className="relative pt-30 pb-5 px-10 bg-slate-50">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{opacity:0, y:20 }} animate={{opacity: 1, y:0 }} transition={{duration: 0.6 }}>
-            <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4">
-              <ArrowLeft size={14} /> Back to Home
-            </Link>
             <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-4">
               Learn <br/> <span className="text-blue-600">Share <br/> <span className="text-black italic text-5xl md:text-8xl"> IMPACT!</span></span>
             </h1>
@@ -158,10 +155,6 @@ export default function VisionMissionPage() {
           </div>
         </div>
       </section>
-      {/*FOOTER*/}
-      <footer className="py-12 text-center text-slate-300 text-[9px] font-black uppercase tracking-[0.4em]">
-        © 2026 StudentsxCEOs Jakarta. <br/> Learn Share Impact!
-      </footer>
     </div>
   );
 }
