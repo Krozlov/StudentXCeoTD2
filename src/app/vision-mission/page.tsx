@@ -3,63 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Zap,
-  Globe,
-  ArrowLeft,
-  Users,
-} from "lucide-react";
-
-{/*VALUE DATA*/}
-const VALUES_DATA = [
-  {
-    id: "friendship",
-    title: "Friendship",
-    icon: <Users size={24} />,
-    color: "bg-rose-500",
-    bgLight: "bg-rose-50",
-    text: "text-rose-600",
-    description: "Having a strong drive to be excellent leaders who connect people to accomplish shared goals.",
-    points: ["TIBA TIBA", "Grand Team Building", "Training Division"],
-    img:"vision/friendship.jpeg"
-  },
-  {
-    id: "leadership",
-    title: "Leadership",
-    icon: <Zap size={24} />,
-    color: "bg-blue-600",
-    bgLight: "bg-blue-50",
-    text: "text-blue-600",
-    description: "A profound organization in leadership, serving as a bridge between the professional world and highly motivated students.",
-    points: ["SxC Impact", "SxCamp"],
-    img: "vision/leadership.jpeg"
-  },
-  {
-    id: "partnership",
-    title: "Partnership",
-    icon: <Globe size={24} />,
-    color: "bg-emerald-500",
-    bgLight: "bg-emerald-50",
-    text: "text-emerald-600",
-    description: "Encouraging partnership and collaboration with many parties.",
-    points: ["SharingXChapter", "SxCamp"],
-    img: "vision/partnership.jpeg"
-  }
-];
+import {ArrowLeft} from "lucide-react";
+import {VALUES_DATA } from "@/constants/values";
+import Image from "next/image";
 
 export default function VisionMissionPage() {
   const [activeValue, setActiveValue] = useState(VALUES_DATA[0]);
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 overflow-x-hidden">
+
       {/*HERO SECTION*/}
       <section className="relative pt-30 pb-5 px-10 bg-slate-50">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{opacity:0, y:20 }} animate={{opacity: 1, y:0 }} transition={{duration: 0.6 }}>
-            <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4">
-              <ArrowLeft size={14} /> Back to Home
-            </Link>
             <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-4">
-              Learn <br /> <span className="text-blue-600">Share <br /> <span className="text-black italic text-5xl md:text-8xl"> IMPACT!</span></span>
+              Learn <br/> <span className="text-blue-600">Share <br/> <span className="text-black italic text-5xl md:text-8xl"> IMPACT!</span></span>
             </h1>
             <p className="text-slate-500 text-xs md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
                StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students.
@@ -103,23 +61,25 @@ export default function VisionMissionPage() {
             {/*NAVIGASI KIRI*/}
             <div className="lg:col-span-5 flex flex-col gap-4">
               {VALUES_DATA.map((val) => {
+                const Icon = val.icon;
                 const isActive = activeValue.id === val.id;
                 return (
                   <button
                     key={val.id}
                     onClick={() => setActiveValue(val)}
                     className={`relative p-8 rounded-[2.5rem] text-left transition-all duration-500 ${
-                      isActive ? `${val.bgLight} border-transparent shadow-xl shadow-slate-100` : "bg-white border border-slate-100 hover:border-slate-300"
+                      isActive ? `${val.bgLight} border-transparent shadow-xl shadow-slate-100`:"bg-white border border-slate-100 hover:border-slate-300"
                     }`}
+                    aria-label={`Select value ${val.title}`}
                   >
                     <div className="flex items-center gap-6 relative z-10">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                        isActive ? `${val.color} text-white scale-110 shadow-lg` : "bg-slate-100 text-slate-400"
+                        isActive ? `${val.color} text-white scale-110 shadow-lg`: "bg-slate-100 text-slate-400"
                       }`}>
-                        {val.icon}
+                      <Icon size={24} aria-hidden="true"/>
                       </div>
                       <div>
-                        <h4 className={`text-xl font-black tracking-tight ${isActive ? "text-slate-900" : "text-slate-400"}`}>
+                        <h4 className={`text-xl font-black tracking-tight ${isActive? "text-slate-900" : "text-slate-400"}`}>
                           {val.title}
                         </h4>
                         <p className={`text-[9px] font-black uppercase tracking-widest mt-1 ${isActive ? val.text : "text-slate-300"}`}>
@@ -159,7 +119,12 @@ export default function VisionMissionPage() {
                     </div>
                   </div>
                   <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl">
-                    <img src={activeValue.img} alt={activeValue.title} className="w-full h-full object-cover" />
+                    <Image
+                      src={`/${activeValue.img}`}
+                      alt={activeValue.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -190,10 +155,6 @@ export default function VisionMissionPage() {
           </div>
         </div>
       </section>
-      {/*FOOTER*/}
-      <footer className="py-12 text-center text-slate-300 text-[9px] font-black uppercase tracking-[0.4em]">
-        © 2026 StudentsxCEOs Jakarta. <br/> Learn Share Impact!
-      </footer>
     </div>
   );
 }
