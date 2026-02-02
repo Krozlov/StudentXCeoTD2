@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  ArrowLeft, 
   PhoneCall,   
   Rocket, 
   CheckCircle2, 
@@ -17,7 +16,7 @@ import {
 import {PROJECTS_DATA as PROJECTS} from "@/constants/projects";
 import {CATEGORIES } from "@/constants/projects";
 
-const getProjectStatus = (start: string, end: string) => {
+const getProjectStatus=(start: string, end: string) => {
   const now = new Date();
   const startDate = new Date(start);
   const endDate = new Date(end);
@@ -92,11 +91,11 @@ export default function ProjectsPage() {
                 const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(proj.title)}&dates=${proj.startDate.replace(/-/g, '')}/${proj.endDate.replace(/-/g, '')}&details=${encodeURIComponent(proj.description)}`;
                 return (
                   <motion.div 
-                    key={proj.id} 
-                    layout
-                    initial={{ opacity:0, y:20 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    exit={{ opacity:0, scale: 0.95 }} 
+                    key={proj.id}
+                    layoutId={`project-${proj.id}`}
+                    initial={{opacity:0, y:20 }} 
+                    animate={{opacity: 1, y: 0 }} 
+                    exit={{opacity:0, scale: 0.95 }} 
                     onClick={() => setSelectedId(proj.id)}
                     onKeyDown={(e)=> e.key === 'Enter' && setSelectedId(proj.id)}
                     tabIndex={0}
@@ -146,7 +145,7 @@ export default function ProjectsPage() {
                         </div>
                       )}
                       
-                      <Link href="#" onClick={(e) => e.stopPropagation()} className="w-full py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-black transition-all flex items-center justify-center gap-2">
+                      <Link href={proj.pic || "#"} target ="_blank" onClick={(e) => e.stopPropagation()} className="w-full py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-black transition-all flex items-center justify-center gap-2">
                         <PhoneCall size={14} /> Person In Charge 
                       </Link>
 
@@ -167,29 +166,6 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/*PARTNER CTA SECTION*/}
-      <section className="py-16 md:py-24 px-6 bg-blue-600 text-white rounded-[2.5rem] md:rounded-[4rem] mx-4 md:mx-20 my-16 md:my-24 overflow-hidden relative">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <Handshake size={40} className="md:w-12 md:h-12 mx-auto mb-6 md:mb-8 opacity-50" />
-          <h2 className="text-3xl md:text-6xl font-black italic tracking-tighter mb-4 md:mb-6 uppercase leading-none">
-            Become Our <br className="md:hidden" /> Strategic Partner.
-          </h2>
-          <p className="text-blue-100 text-sm md:text-xl font-medium italic mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
-            Collaborate with StudentsxCEOs to empower the next generation of leaders. 
-          </p>
-          
-          <Link 
-            href="#" 
-            className="inline-flex w-full md:w-auto items-center justify-center gap-3 px-8 md:px-12 py-5 md:py-6 bg-white text-blue-600 rounded-2xl font-black text-[10px] md:text-[11px] uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl"
-          >
-            Learn More <ArrowUpRight size={16} />
-          </Link>
-        </div>
-
-        {/*Background*/}
-        <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-blue-400 rounded-full blur-[100px] md:blur-[150px] opacity-30 -translate-y-1/2 translate-x-1/2" />
-      </section>
-
       {/*MODAL POPUP*/}
       <AnimatePresence>
         {selectedId && selectedProject && (
@@ -205,7 +181,7 @@ export default function ProjectsPage() {
 
             {/*Konten*/}
             <motion.div 
-              layoutId={String(selectedId)} 
+              layoutId={'project-${selectedId}'} 
               className="relative bg-white w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 md:p-14 rounded-[2.5rem] md:rounded-[4rem] shadow-2xl z-10 custom-scrollbar"
             >
               {/*Close Button Mobile*/}
